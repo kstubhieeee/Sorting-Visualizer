@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Insertion Sort Visualizer</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+  }
+  #array-container {
+    display: flex;
+    gap: 5px;
+  }
+  .array-box {
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    width: 40px;
+    margin: 0;
+    border-radius: 10px;
+    transition: height 0.2s, background-color 0.2s;
+  }
+</style>
+</head>
+<body>
+<h1>Insertion Sort Visualizer</h1>
+<div id="array-container"></div>
+<button onclick="startSorting()">Sort</button>
+<script>
+  function generateArray(size, min, max) {
+    return Array.from({ length: size }, () => Math.floor(Math.random() * (max - min + 1)) + min);
+  }
+
+  function renderArray(array) {
+    const arrayContainer = document.getElementById('array-container');
+    arrayContainer.innerHTML = '';
+    array.forEach(num => {
+      const box = document.createElement('div');
+      box.classList.add('array-box');
+      box.style.height = `${num * 5}px`; // Adjusted height
+      box.style.backgroundColor = 'dodgerblue';
+      box.textContent = num;
+      arrayContainer.appendChild(box);
+    });
+  }
+
+  async function insertionSort(array) {
+    for (let i = 1; i < array.length; i++) {
+      let key = parseInt(array[i].textContent);
+      let j = i - 1;
+
+      while (j >= 0 && parseInt(array[j].textContent) > key) {
+        array[j + 1].style.height = array[j].style.height;
+        array[j + 1].textContent = array[j].textContent;
+        array[j + 1].style.backgroundColor = 'red'; // Highlight selected element
+        j = j - 1;
+        await sleep(200);
+      }
+
+      array[j + 1].style.height = `${key * 5}px`; // Adjusted height
+      array[j + 1].textContent = key;
+      array[j + 1].style.backgroundColor = 'dodgerblue'; // Reset background color
+    }
+  }
+
+  async function startSorting() {
+    const array = document.querySelectorAll('.array-box');
+    await insertionSort(array);
+    for (let i = 0; i < array.length; i++) {
+      array[i].style.backgroundColor = 'green'; // Final sorted color
+      await sleep(100); // Additional delay after sorting a box
+    }
+  }
+
+  function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
+  const array = generateArray(20, 1, 50);
+  renderArray(array);
+</script>
+</body>
+</html>

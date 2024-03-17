@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quicksort Visualizer</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+  }
+  #array-container {
+    display: flex;
+    gap: 5px;
+  }
+  .array-bar {
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    width: 40px;
+    margin: 0;
+    border-radius: 10px;
+    transition: height 0.2s, background-color 0.2s;
+  }
+</style>
+</head>
+<body>
+<h1>Quicksort Visualizer</h1>
+<div id="array-container"></div>
+<button onclick="startSorting()">Sort</button>
+<script>
+  function generateArray(size, min, max) {
+    return Array.from({ length: size }, () => Math.floor(Math.random() * (max - min + 1)) + min);
+  }
+
+  function renderArray(array) {
+    const arrayContainer = document.getElementById('array-container');
+    arrayContainer.innerHTML = '';
+    array.forEach(num => {
+      const bar = document.createElement('div');
+      bar.classList.add('array-bar');
+      bar.style.height = `${num * 5}px`;
+      bar.style.backgroundColor = 'dodgerblue';
+      bar.textContent = num;
+      arrayContainer.appendChild(bar);
+    });
+  }
+
+  async function quicksort(array, start = 0, end = array.length - 1) {
+    if (start >= end) return;
+
+    let index = await partition(array, start, end);
+
+    await Promise.all([
+      quicksort(array, start, index - 1),
+      quicksort(array, index + 1, end)
+    ]);
+  }
+
+  async function partition(array, start, end) {
+    let pivotIndex = start;
+    let pivotValue = parseInt(array[end].style.height) / 5;
+
+    for (let i = start; i < end; i++) {
+      if (parseInt(array[i].style.height) / 5 < pivotValue) {
+        await swap(array, i, pivotIndex);
+        pivotIndex++;
+      }
+      array[i].style.backgroundColor = 'red'; // Highlight comparison
+      await sleep(300); // Delay for visualization
+      array[i].style.backgroundColor = 'dodgerblue'; // Reset color after comparison
+    }
+
+    await swap(array, pivotIndex, end);
+    return pivotIndex;
+  }
+
+  async function swap(array, i, j) {
+    let tempHeight = array[i].style.height;
+    let tempText = array[i].textContent;
+    array[i].style.height = array[j].style.height;
+    array[i].textContent = array[j].textContent;
+    array[j].style.height = tempHeight;
+    array[j].textContent = tempText;
+  }
+
+  async function startSorting() {
+    const array = document.querySelectorAll('.array-bar');
+    await quicksort(array, 0, array.length - 1);
+    for (let i = 0; i < array.length; i++) {
+      array[i].style.backgroundColor = 'green'; // Final sorted color
+      await sleep(100); // Additional delay after sorting a bar
+    }
+  }
+
+  function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
+  const array = generateArray(20, 1, 50);
+  renderArray(array);
+</script>
+</body>
+</html>
