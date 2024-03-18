@@ -4,6 +4,7 @@ Insertion sort visualizer and Quick sort visualizer using HTML, CSS, and JavaScr
 
 ## Video Demonstration
 
-[![Video Demo](https://img.youtube.com/vi/OJqlmq3XI-A/0.jpg)](https://youtu.be/OJqlmq3XI-A)
+Click [here](https://www.youtube.com/watch?v=OJqlmq3XI-A) to watch the video demonstration.
+
 
 
