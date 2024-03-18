@@ -27,12 +27,13 @@
     border-radius: 10px;
     transition: height 0.2s, background-color 0.2s;
   }
+  
 </style>
 </head>
 <body>
 <h1>Insertion Sort Visualizer</h1>
 <div id="array-container"></div>
-<button onclick="startSorting()">Sort</button>
+<button class="" onclick="startSorting()">Sort</button>
 <script>
   function generateArray(size, min, max) {
     return Array.from({ length: size }, () => Math.floor(Math.random() * (max - min + 1)) + min);

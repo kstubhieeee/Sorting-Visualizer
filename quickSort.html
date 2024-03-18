@@ -13,6 +13,23 @@
     height: 100vh;
     margin: 0;
   }
+  #myVideo {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+  z-index: -1; 
+    object-fit: cover;
+}
+h1{
+    color: white;
+    font-family: "Quicksand", sans-serif;
+    position: absolute;
+    margin-bottom: 400px;
+    margin-right: 40px;
+    font-size:50px ;
+  }
   #array-container {
     display: flex;
     gap: 5px;
@@ -27,12 +44,47 @@
     border-radius: 10px;
     transition: height 0.2s, background-color 0.2s;
   }
+
+  
 </style>
 </head>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&family=Sacramento&display=swap" rel="stylesheet">
 <body>
+  <video autoplay muted loop id="myVideo">
+    <source src="space.mp4" type="video/mp4">
+  </video>
 <h1>Quicksort Visualizer</h1>
 <div id="array-container"></div>
-<button onclick="startSorting()">Sort</button>
+<style>
+  .shadow__btn {
+    padding: 10px 20px;
+    border: none;
+    font-size: 17px;
+    color: #fff;
+    border-radius: 7px;
+    letter-spacing: 4px;
+    font-weight: 700;
+    text-transform: uppercase;
+    transition: 0.5s;
+    transition-property: box-shadow;
+    font-family: "Quicksand", sans-serif;
+    position: absolute;
+    margin-top: 400px;
+  }
+  
+  .shadow__btn {
+    background: rgb(45,186,78);
+    box-shadow: 0 0 25px rgb(45,186,78);
+  }
+  
+  .shadow__btn:hover {
+    box-shadow: 0 0 5px rgb(45,186,78),
+                0 0 25px rgb(45,186,78),
+                0 0 50px rgb(45,186,78),
+                0 0 100px rgb(45,186,78);
+  }
+</style>
+<button class="shadow__btn" onclick="startSorting()">Sort</button>
 <script>
   function generateArray(size, min, max) {
     return Array.from({ length: size }, () => Math.floor(Math.random() * (max - min + 1)) + min);
@@ -45,7 +97,7 @@
       const bar = document.createElement('div');
       bar.classList.add('array-bar');
       bar.style.height = `${num * 5}px`;
-      bar.style.backgroundColor = 'dodgerblue';
+      bar.style.backgroundColor = 'rgb(45,186,78)';
       bar.textContent = num;
       arrayContainer.appendChild(bar);
     });
