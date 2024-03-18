@@ -5,11 +5,88 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sorting Visualizer</title>
 </head>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&family=Sacramento&display=swap" rel="stylesheet">
 <body>
-<h1>Welcome to Sorting Visualizer</h1>
-<ul>
-  <li><a href="insertionSort.html">Insertion Sort</a></li>
-  <li><a href="quickSort.html">Quick Sort</a></li>
-</ul>
+  <video autoplay muted loop id="myVideo">
+    <source src="space.mp4" type="video/mp4">
+  </video>
+  <div class="fireflies-container"></div>
+<h1>Sorting Visualizer</h1>
+
+ <button class="shadow__btn left"> <a href="insertionSort.html">Insertion Sort</a></li></button>
+ <button class="shadow__btn right"> <a href="quickSort.html">Quick Sort</a></li></button> 
+<style>
+  .shadow__btn {
+    padding: 10px 20px;
+    border: none;
+    font-size: 17px;
+    color: #fff;
+    border-radius: 7px;
+    letter-spacing: 4px;
+    font-weight: 700;
+    text-transform: uppercase;
+    transition: 0.5s;
+    transition-property: box-shadow;
+    font-family: "Quicksand", sans-serif;
+  }
+  
+  .shadow__btn {
+    background: rgb(45,186,78);
+    box-shadow: 0 0 25px rgb(45,186,78);
+  }
+  
+  .shadow__btn:hover {
+    box-shadow: 0 0 5px rgb(45,186,78),
+                0 0 25px rgb(45,186,78),
+                0 0 50px rgb(45,186,78),
+                0 0 100px rgb(45,186,78);
+  }
+
+  a{
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+  }
+  #myVideo {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+}
+  html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+  body{
+    margin:0;
+    text-align: center;
+    background-image: linear-gradient(to right, rgb(35, 26, 78) , rgb(6, 7, 27));
+  }
+
+  h1{
+    color: white;
+    font-family: "Quicksand", sans-serif;
+    position: relative;
+    margin-top: 150px;
+    margin-right: 40px;
+    font-size:50px ;
+  }
+
+  .left{
+    position: absolute;
+    margin-left: 250px;
+    margin-top: 100px;
+  }
+
+  .right{
+    position: relative;
+    margin-right: 320px;
+    margin-top: 100px;
+  }
+</style>
+
 </body>
 </html>
